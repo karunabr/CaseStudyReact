@@ -92,7 +92,6 @@ class CreatePatientHistory extends Component {
     // dynamically handling event changes
     console.log(event.currentTarget.name,event.currentTarget.value);
     patientHistory[event.currentTarget.name] = event.currentTarget.value;
-    //console.log(patientHistory);
     this.setState({patientHistory});
     console.log(this.state);
   };
