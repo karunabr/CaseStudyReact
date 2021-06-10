@@ -20,6 +20,8 @@ class PatientHistory extends Component {
             this.setState({ patient_history: res.data });
           });
           console.log("patient_history: ", this.state.patient_history);
+        
+
     }
 
     deletePatientHistory = (id) => {
@@ -53,6 +55,10 @@ class PatientHistory extends Component {
       };
     
       render() {
+        // console.log(this.state.patient_history[0]);
+        // console.log(this.state.patient_history[0].diet.dietType);
+        // console.log(this.state.patient_history[0].patient.patientName);
+        // console.log(this.state.patient_history[0].disease.diseaseName);
         const { search, sortColumn, patient_history } = this.state;
         var sorted = [];
         if (search) {
@@ -66,6 +72,7 @@ class PatientHistory extends Component {
           );
         }
         console.log(this.state.patient_history);
+        
         console.log("Sorted..", sorted);
         return (
           <div className="w-75 mt-5 mx-auto">
@@ -89,27 +96,38 @@ class PatientHistory extends Component {
               <thead className="table-dark">
                 <tr>
                   <th onClick={() => this.handleSort("patientHistoryId")}>Patient History Id</th>
+                  <th onClick={() => this.handleSort("patientId")}>Patient Name</th>
+                  <th onClick={() => this.handleSort("desId")}>Disease Name</th>
+                  <th onClick={() => this.handleSort("dietId")}>Diet Type</th>
                   <th onClick={() => this.handleSort("recordedDate")}>Recorded Date</th>
                   <th colSpan="2">Action</th>
                 </tr>
               </thead>
               <tbody>
                 { sorted.map((history) => (
-                  <tr key={history.patientHistoryId}>
-                    <td>{history.patientHistoryId}</td>
-                    <td>{history.recordedDate}</td>
-                    <td>
-                      <Link to={`/history/${history.patientHistoryId}`}>
-                        <button className="btn btn-secondary">Update</button>
-                      </Link>
-    
-                      <button
-                        className="btn btn-danger ml-2"
-                        onClick={() => this.deletePatientHistory(history.patientHistoryId)}>
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
+                 <tr key={history.patientHistoryId}>
+                 <td>{history.patientHistoryId}</td>
+                 <td>{history.patient.patientName}</td>
+                 <td>{history.disease.desName}</td>
+                 <td>{history.diet.dietType}</td>
+                 <td>{history.recordedDate}</td>
+                 <td>
+                   <Link to={`/history/${history.patientHistoryId}`}>
+                     <button className="btn btn-secondary">Update</button>
+                   </Link>
+ 
+                   <button
+                     className="btn btn-danger ml-2"
+                     onClick={() => this.deletePatientHistory(history.patientHistoryId)}>
+                     Delete
+                   </button>
+                 </td>
+               </tr>
+              
+                  
+                 
+                  
+                  
                 ))}
               </tbody>
             </table>

@@ -1,5 +1,5 @@
 import  axios from "axios"
-const DIET_API_BASE_URL = "http://localhost:8087/diet";
+const DIET_API_BASE_URL = "http://localhost:8080/diet";
 class DietService{
     async showAllDiet() {
 
